@@ -10,9 +10,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class LibroDto {
+public class BookDto {
     private Long id;
     private String name;
-    private String autor;
-    private LocalDate fechaDeEdicion;
+    private String author;
+    private LocalDate editionDate;
 }
