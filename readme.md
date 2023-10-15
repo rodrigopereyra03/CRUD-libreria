@@ -25,7 +25,7 @@ API Rest para operaciones CRUD sobre libros.
 
 ### Obtener Detalles de un Libro por Id
 
-- **URL:** `/books/{id}`
+- **URL:** `/api/books/{id}`
 - **Método HTTP:** GET
 - **Descripción:** Obtiene detalles de un libro específico utilizando su ID.
 - **Parámetros de URL:**
@@ -43,7 +43,7 @@ API Rest para operaciones CRUD sobre libros.
 
 ### Agregar un Nuevo Libro
 
-- **URL:** `/books`
+- **URL:** `/api/books`
 - **Método HTTP:** POST
 - **Descripción:** Agrega un nuevo libro a la base de datos.
 - **Respuesta Exitosa:** Código de estado HTTP 201 Created
@@ -58,7 +58,7 @@ API Rest para operaciones CRUD sobre libros.
 
 ### Actualizar un Libro Existente
 
-- **URL:** `/books`
+- **URL:** `/api/books`
 - **Método HTTP:** PUT
 - **Descripción:** Actualiza los detalles de un libro existente
 - **Respuesta Exitosa:** Código de estado HTTP 200 OK
@@ -74,7 +74,7 @@ API Rest para operaciones CRUD sobre libros.
 
 ### Eliminar un Libro
 
-- **URL:** `/books/{id}`
+- **URL:** `/api/books/{id}`
 - **Método HTTP:** DELETE
 - **Descripción:** Elimina un libro de la base de datos utilizando su ID.
 - **Parámetros de URL:**
@@ -89,7 +89,7 @@ API Rest para operaciones CRUD sobre libros.
 
 ### Buscar Libro por nombre o autor
 
--- **URL:** `/books/getBy`
+-- **URL:** `/api/books/getBy`
 - **Método HTTP:** GET
 - **Descripción:** Busca un Libro en la base de datos por su nombre o autor (sino que busque por parte de su nombre o autor)
 - **Parámetros de URL:**
@@ -108,7 +108,7 @@ API Rest para operaciones CRUD sobre libros.
 
 ### Buscar Libro por codigo
 
--- **URL:** `/books/getByCode`
+-- **URL:** `/api/books/getByCode`
 - **Método HTTP:** GET
 - **Descripción:** Busca un Libro en la base de datos segun su codigo.
 - **Parámetros de URL:**
