@@ -1,5 +1,6 @@
 package com.example.libros.api.dtos;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -12,7 +13,11 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 public class BookDto {
     private Long id;
+    @NotBlank(message = "Name is required")
     private String name;
+    @NotBlank(message = "author is required")
     private String author;
     private LocalDate editionDate;
+
+    private String codeBook;
 }

@@ -7,17 +7,20 @@ import java.time.LocalDate;
 @Table(name = "books")
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "name_book")
     private String name;
     private String author;
+    @Column(name = "edition_date")
     private LocalDate editionDate;
+    @Column(name = "code_book")
+    private String codeBook;
 
-    public Book(String name, String author, LocalDate editionDate) {
+    public Book(String name, String author, LocalDate editionDate,String codeBook) {
         this.name = name;
         this.author = author;
         this.editionDate = editionDate;
+        this.codeBook = codeBook;
     }
 
     public Book() {
@@ -54,5 +57,13 @@ public class Book {
 
     public void setEditionDate(LocalDate editionDate) {
         this.editionDate = editionDate;
+    }
+
+    public String getCodeBook() {
+        return codeBook;
+    }
+
+    public void setCodeBook(String codeBook) {
+        this.codeBook = codeBook;
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @UtilityClass
 public class BookMapper {
-    //Los mappers me permiten enviar los datos desde una entidad hacia un dto o visceversa
+    //Esta clase permite pasar los datos desde una entidad hacia un dto o visceversa
 
     //Recibe un dto y devuelve un libro
     public Book dtoToBook(BookDto dto){
@@ -16,6 +16,7 @@ public class BookMapper {
         book.setName(dto.getName());
         book.setAuthor(dto.getAuthor());
         book.setEditionDate(dto.getEditionDate());
+        book.setCodeBook(dto.getCodeBook());
         book.setId(dto.getId());
 
         return book;
@@ -27,6 +28,7 @@ public class BookMapper {
         dto.setName(book.getName());
         dto.setAuthor(book.getAuthor());
         dto.setEditionDate(book.getEditionDate());
+        dto.setCodeBook(book.getCodeBook());
         dto.setId(book.getId());
 
         return dto;
