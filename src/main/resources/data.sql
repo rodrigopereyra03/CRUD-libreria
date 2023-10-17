@@ -12,7 +12,7 @@ INSERT INTO author (id_author, name_author) VALUES (10, 'Nombre del Autor 10');
 
 
 
-/*Ingreso datos a la tabla boos*/
+/*Ingreso datos a la tabla books*/
 INSERT INTO books (id, name, edition_date, code_book, author_id_author)
 VALUES (1, 'El tunel', '2023-10-17', 'Código del Libro 1', 1);
 
