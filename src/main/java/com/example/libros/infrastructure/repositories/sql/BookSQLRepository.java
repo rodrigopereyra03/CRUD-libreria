@@ -57,5 +57,10 @@ public class BookSQLRepository implements IBookRepository {
         return sqlRepository.getBookByCode(code);
     }
 
+    @Override
+    public List<Book> findAllById(List<Long> idBooks) {
+        return sqlRepository.findAllById(idBooks);
+    }
+
 
 }

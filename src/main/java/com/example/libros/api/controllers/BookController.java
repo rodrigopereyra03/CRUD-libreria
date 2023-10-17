@@ -2,7 +2,8 @@ package com.example.libros.api.controllers;
 
 
 import com.example.libros.api.dtos.BookDto;
-import com.example.libros.application.services.BookService;
+import com.example.libros.application.services.IBookService;
+import com.example.libros.application.services.impl.BookService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +15,10 @@ import java.util.List;
 @RequestMapping("/api")
 public class BookController {
 
-    private final BookService service;
+    private final IBookService iBookService;
 
-    public BookController(BookService service){
-        this.service = service;
+    public BookController(IBookService service){
+        this.iBookService = service;
     }
 
     //Metodos HTTP
@@ -26,7 +27,7 @@ public class BookController {
     @GetMapping(value = "/books")
     public ResponseEntity<List<BookDto>> getBooks(){
         //1)Obtener todos los libros de la BD
-        List<BookDto> books = service.getBooks();
+        List<BookDto> books = iBookService.getBooks();
 
         //2)Devolver la lista y enviar coomo respuesta
         return ResponseEntity.status(HttpStatus.OK).body(books);
@@ -36,32 +37,32 @@ public class BookController {
     @PostMapping(value = "/books")
     public ResponseEntity<BookDto> createBook(@Valid @RequestBody BookDto dto){
         //Redirije hacia el responsable de crear un libro
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.createBook(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(iBookService.createBook(dto));
     }
 
     //PUT
     @PutMapping(value = "/books")
     public ResponseEntity<BookDto> updateBook( @RequestBody BookDto book){
-        return ResponseEntity.status(HttpStatus.OK).body(service.updateBook(book));
+        return ResponseEntity.status(HttpStatus.OK).body(iBookService.updateBook(book));
     }
 
     //Delete
     @DeleteMapping(value = "/books/{id}")
     public ResponseEntity<String> deleteBook(@PathVariable Long id){
-        String result = service.deleteBook(id);
+        String result = iBookService.deleteBook(id);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-    //Busqueda por Codigo/Id
+    //Busqueda porId
     @GetMapping(value = "/books/{id}")
     public ResponseEntity<BookDto> getBookById(@PathVariable Long id){
-        return ResponseEntity.status(HttpStatus.OK).body(service.getBookById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(iBookService.getBookById(id));
     }
 
     //Busqueda por nombre  parte del nombre o autor
     @GetMapping("/books/getBy")
     public ResponseEntity<List<BookDto>> getBookByNameOrAuthor(@RequestParam String keyword){
-        List<BookDto> books = service.getBookByNameOrAuthor(keyword);
+        List<BookDto> books = iBookService.getBookByNameOrAuthor(keyword);
         if(!books.isEmpty()){
             return ResponseEntity.status(HttpStatus.OK).body(books);
         }
@@ -70,7 +71,7 @@ public class BookController {
 
     @GetMapping(value = "/books/getByCode")
     public ResponseEntity<List<BookDto>>getByCode(@RequestParam String code){
-        List<BookDto> books = service.getByCode(code);
+        List<BookDto> books = iBookService.getByCode(code);
         if (!books.isEmpty()){
             return ResponseEntity.status(HttpStatus.OK).body(books);
         }

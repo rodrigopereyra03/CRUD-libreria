@@ -1,11 +1,10 @@
 package com.example.libros.application.services;
 
 import com.example.libros.api.dtos.BookDto;
+import com.example.libros.application.services.impl.BookService;
 import com.example.libros.domain.exceptions.BookNotFoundException;
 import com.example.libros.domain.models.Book;
-import com.example.libros.infrastructure.repositories.IBookRepository;
 import com.example.libros.infrastructure.repositories.sql.BookSQLRepository;
-import com.example.libros.infrastructure.repositories.sql.IBookSQLRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,9 +15,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
-import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -37,7 +34,6 @@ class BookServiceTest {
         MockitoAnnotations.initMocks(this);
         book = new Book();
         book.setName("Rodrigo");
-        book.setAuthor("Messi");
         book.setEditionDate(LocalDate.now());
         bookDto = new BookDto();
 

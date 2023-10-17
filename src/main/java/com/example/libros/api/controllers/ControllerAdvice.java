@@ -1,5 +1,6 @@
 package com.example.libros.api.controllers;
 
+import com.example.libros.domain.exceptions.AuthorNotFoundException;
 import com.example.libros.domain.exceptions.BookNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,4 +38,13 @@ public class ControllerAdvice {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
+
+    @ExceptionHandler(AuthorNotFoundException.class)
+    public ResponseEntity<String> handleNoBookFoundException(
+            AuthorNotFoundException ex, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
+
+
 }

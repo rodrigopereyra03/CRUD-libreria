@@ -19,4 +19,6 @@ public interface IBookRepository {
     Boolean existsById(Long id);
 
     List<Book> findByCode(String code);
+
+    List<Book> findAllById(List<Long> idBooks);
 }

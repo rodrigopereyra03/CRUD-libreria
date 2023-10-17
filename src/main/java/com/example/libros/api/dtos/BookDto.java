@@ -15,9 +15,11 @@ public class BookDto {
     private Long id;
     @NotBlank(message = "Name is required")
     private String name;
-    @NotBlank(message = "author is required")
-    private String author;
+   // @NotBlank(message = "author is required")
+
     private LocalDate editionDate;
 
     private String codeBook;
+
+    private AuthorDto authorDto;
 }

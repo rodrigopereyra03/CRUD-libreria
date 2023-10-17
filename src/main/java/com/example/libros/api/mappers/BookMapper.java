@@ -1,5 +1,6 @@
 package com.example.libros.api.mappers;
 
+import com.example.libros.api.dtos.AuthorDto;
 import com.example.libros.api.dtos.BookDto;
 import com.example.libros.domain.models.Book;
 import lombok.experimental.UtilityClass;
@@ -14,7 +15,7 @@ public class BookMapper {
     public Book dtoToBook(BookDto dto){
         Book book = new Book();
         book.setName(dto.getName());
-        book.setAuthor(dto.getAuthor());
+      //  book.setAuthor(dto.getAuthor());
         book.setEditionDate(dto.getEditionDate());
         book.setCodeBook(dto.getCodeBook());
         book.setId(dto.getId());
@@ -26,11 +27,15 @@ public class BookMapper {
     public BookDto bookToDtoMap(Book book){
         BookDto dto = new BookDto();
         dto.setName(book.getName());
-        dto.setAuthor(book.getAuthor());
+      //  dto.setAuthor(book.getAuthor());
         dto.setEditionDate(book.getEditionDate());
         dto.setCodeBook(book.getCodeBook());
-        dto.setId(book.getId());
 
+        if (book.getAuthor()!=null){
+            AuthorDto authorDto = AuthorMapper.authorToDto(book.getAuthor());
+            dto.setAuthorDto(authorDto);
+        }
+        dto.setId(book.getId());
         return dto;
     }
 

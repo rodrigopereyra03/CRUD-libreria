@@ -1,21 +1,27 @@
-package com.example.libros.application.services;
+package com.example.libros.application.services.impl;
 
 import com.example.libros.api.dtos.BookDto;
 import com.example.libros.api.mappers.BookMapper;
+import com.example.libros.application.services.IBookService;
 import com.example.libros.domain.exceptions.BookNotFoundException;
+import com.example.libros.domain.models.Author;
 import com.example.libros.domain.models.Book;
+import com.example.libros.infrastructure.repositories.IAuthorRepository;
 import com.example.libros.infrastructure.repositories.IBookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class BookService {
+public class BookService implements IBookService {
 
     private final IBookRepository bookRepository;
+    private final IAuthorRepository iAuthorRepository;
 
-    public BookService(IBookRepository bookRepository) {
+    public BookService(IBookRepository bookRepository, IAuthorRepository iAuthorRepository) {
         this.bookRepository = bookRepository;
+        this.iAuthorRepository = iAuthorRepository;
     }
 
     // Genero los metodos del CRUD
@@ -33,7 +39,15 @@ public class BookService {
 
     //Crear un libro
     public BookDto createBook(BookDto book){
-        return BookMapper.bookToDtoMap(bookRepository.save(BookMapper.dtoToBook(book)));
+        Optional<Author> author = Optional.ofNullable(iAuthorRepository.findById(book.getAuthorDto().getId()));
+        Book bookModel = BookMapper.dtoToBook(book);
+        bookModel.setAuthor(author.get()); //chequear q exista y si no existe tirar un error
+        bookModel = bookRepository.save(bookModel);
+        BookDto dto = BookMapper.bookToDtoMap(bookModel);
+        return dto;
+
+
+       // return BookMapper.bookToDtoMap(bookRepository.save(BookMapper.dtoToBook(book)));
     }
 
     public BookDto updateBook(BookDto book){
