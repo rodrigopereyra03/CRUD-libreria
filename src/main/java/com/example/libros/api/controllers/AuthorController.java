@@ -37,7 +37,7 @@ public class AuthorController {
     //PUT
     @PutMapping(value = "/authors/{id}")
     public ResponseEntity<AuthorDto> updateAuthor(@PathVariable Long id ,@RequestBody AuthorDto dto){
-        return ResponseEntity.status(HttpStatus.OK).body(authorService.updateAuthor(dto, id));
+        return ResponseEntity.status(HttpStatus.OK).body(authorService.updateAuthor(id,dto));
     }
 
     //Delete

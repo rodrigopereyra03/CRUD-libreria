@@ -8,7 +8,6 @@ public interface IAuthorRepository {
 
     List<Author> findAll();
 
-
     Author save(Author author);
 
     Boolean existsById(Long id);
@@ -16,4 +15,6 @@ public interface IAuthorRepository {
     void deleteById(Long id);
 
     Author findById(Long id);
+
+    Author getReferenceById(Long id);
 }

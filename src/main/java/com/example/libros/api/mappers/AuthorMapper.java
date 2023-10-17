@@ -14,7 +14,6 @@ public class AuthorMapper {
     public Author dtoToAuthor(AuthorDto authorDto){
         Author author = new Author();
         author.setName_author(authorDto.getName_author());
-     //   author.setId(authorDto.getId());
         return author;
     }
 
@@ -23,7 +22,7 @@ public class AuthorMapper {
         List<Long> idBooks = new ArrayList<>();
         authorDto.setName_author(author.getName_author());
         if (author.getBooks()!=null)
-            for (Book b:author.getBooks()) {
+            for (Book b :author.getBooks()) {
                 Long id =b.getId();
                 idBooks.add(id);
             }

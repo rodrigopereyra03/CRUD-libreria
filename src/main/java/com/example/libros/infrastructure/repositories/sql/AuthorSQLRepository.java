@@ -29,6 +29,11 @@ public class AuthorSQLRepository implements IAuthorRepository {
     }
 
     @Override
+    public Author getReferenceById(Long id) {
+        return authorSQLRepository.getReferenceById(id);
+    }
+
+    @Override
     public List<Author> findAll() {
         return authorSQLRepository.findAll();
     }

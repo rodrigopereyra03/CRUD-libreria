@@ -1,11 +1,12 @@
 package com.example.libros.domain.models;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "books")
 public class Book {
@@ -22,4 +23,17 @@ public class Book {
     private Author author;
 
 
+    public Book(String name, LocalDate editionDate, String codeBook, Author author) {
+        this.name = name;
+        this.editionDate = editionDate;
+        this.codeBook = codeBook;
+        this.author = author;
+    }
+
+    public Book() {
+
+    }
+
+    public Book(Long l, String libro1) {
+    }
 }

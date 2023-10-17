@@ -41,23 +41,41 @@ public class BookService implements IBookService {
     public BookDto createBook(BookDto book){
         Optional<Author> author = Optional.ofNullable(iAuthorRepository.findById(book.getAuthorDto().getId()));
         Book bookModel = BookMapper.dtoToBook(book);
-        bookModel.setAuthor(author.get()); //chequear q exista y si no existe tirar un error
+        if (author.isEmpty()) {
+            throw new BookNotFoundException("Book not found with id");
+        }else{
+            bookModel.setAuthor(author.get());
+        }
         bookModel = bookRepository.save(bookModel);
-        BookDto dto = BookMapper.bookToDtoMap(bookModel);
-        return dto;
-
-
-       // return BookMapper.bookToDtoMap(bookRepository.save(BookMapper.dtoToBook(book)));
+        return BookMapper.bookToDtoMap(bookModel);
     }
 
     public BookDto updateBook(BookDto book){
-        Boolean exists = bookRepository.existsById(book.getId());
-        if(!exists){
-            throw new BookNotFoundException("Book not found with id: " + book.getId());
-        }
-        Book updated = bookRepository.save(BookMapper.dtoToBook(book));
+       Optional<Book> bookCreated = Optional.ofNullable(bookRepository.findById(book.getId()));
 
-        return BookMapper.bookToDtoMap(updated);
+        if(bookCreated.isPresent()){
+            Book entity = bookCreated.get();
+            if (book.getName() != null) {
+                entity.setName(book.getName());
+            }
+            if (book.getCodeBook() != null) {
+                entity.setCodeBook(book.getCodeBook());
+            }
+            if (book.getEditionDate() != null) {
+                entity.setEditionDate(book.getEditionDate());
+            }
+            if (book.getAuthorDto() != null) {
+                Author author = iAuthorRepository.getReferenceById(book.getAuthorDto().getId());
+                if (author != null) {
+                    entity.setAuthor(author);
+                }
+            }
+            Book saved = bookRepository.save(entity);
+            return BookMapper.bookToDtoMap(saved);
+        }else {
+            throw new BookNotFoundException("Book not found with id");
+        }
+
     }
 
     public String deleteBook(Long id){

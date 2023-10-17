@@ -25,7 +25,7 @@ public class BookSQLRepository implements IBookRepository {
     @Override
     public Book findById(Long id) {
         Optional<Book> book = sqlRepository.findById(id);
-        if(book.isEmpty()){
+        if(book.isPresent()){
             throw new BookNotFoundException("Book not found with id: " + id);
 
         }
@@ -54,6 +54,9 @@ public class BookSQLRepository implements IBookRepository {
 
     @Override
     public List<Book> findByCode(String code) {
+        if (code.isEmpty()){
+            throw new BookNotFoundException("Code not exists");
+        }
         return sqlRepository.getBookByCode(code);
     }
 

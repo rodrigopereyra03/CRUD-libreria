@@ -1,12 +1,50 @@
-INSERT INTO books (id,name,author,edition_date, code_book) VALUES (1001,'El tunel','Ernesto Sábato','1948-03-25','9789500433624');
-INSERT INTO books (id,name,author,edition_date, code_book) VALUES (1002,'Martin Fierro','Jose Hernandez','1872-08-12','987590004');
-INSERT INTO books (id,name,author,edition_date, code_book) VALUES (1003,'El Aleph','Jorge Luis Borges','1945-06-1','9789500755764');
-INSERT INTO books (id,name,author,edition_date, code_book) VALUES (1004,'Operacion Masacre','Rodolfo Wash','1957-07-1','9789505153527');
-INSERT INTO books (id,name,author,edition_date, code_book) VALUES (1005,'Rayuela','Julio Cortazar','1963-02-14','9788437604572');
-INSERT INTO books (id,name,author,edition_date, code_book) VALUES (1006,'Ficciones','Jorge Luis Borges','1944-04-24','9780802130303');
-INSERT INTO books (id,name,author,edition_date, code_book) VALUES (1007,'Cuentos de la selva','Horacio Quiroga','1918-09-23','9789505810758');
-INSERT INTO books (id,name,author,edition_date, code_book) VALUES (1008,'Las fieras cómplices','Horacio Quiroga','2007-10-24','9788496509740');
-INSERT INTO books (id,name,author,edition_date, code_book) VALUES (1009,'Fahrenheit 451','Ray Bradbury','1953-01-24','9788445006771');
+/*Ingreso datos a la tabla author*/
+INSERT INTO author (id_author, name_author) VALUES (1, 'Ernesto Sábato');
+INSERT INTO author (id_author, name_author) VALUES (2, 'Jose Hernandez');
+INSERT INTO author (id_author, name_author) VALUES (3, 'Jorge Luis Borges');
+INSERT INTO author (id_author, name_author) VALUES (4, 'Rodolfo Wash');
+INSERT INTO author (id_author, name_author) VALUES (5, 'Julio Cortazar');
+INSERT INTO author (id_author, name_author) VALUES (6, 'Nombre del autor 6');
+INSERT INTO author (id_author, name_author) VALUES (7, 'Horacio Quiroga');
+INSERT INTO author (id_author, name_author) VALUES (8, 'Ray Bradbury');
+INSERT INTO author (id_author, name_author) VALUES (9, 'Nombre del Autor 9');
+INSERT INTO author (id_author, name_author) VALUES (10, 'Nombre del Autor 10');
+
+
+
+/*Ingreso datos a la tabla boos*/
+INSERT INTO books (id, name, edition_date, code_book, author_id_author)
+VALUES (1, 'El tunel', '2023-10-17', 'Código del Libro 1', 1);
+
+INSERT INTO books (id, name, edition_date, code_book, author_id_author)
+VALUES (2, 'Martin Fierro', '2023-10-17', 'Código del Libro 2', 2);
+
+INSERT INTO books (id, name, edition_date, code_book, author_id_author)
+VALUES (3, 'El Aleph', '2023-10-17', 'Código del Libro 3', 3);
+
+INSERT INTO books (id, name, edition_date, code_book, author_id_author)
+VALUES (4, 'Operacion Masacre', '2023-10-17', 'Código del Libro 4', 4);
+
+INSERT INTO books (id, name, edition_date, code_book, author_id_author)
+VALUES (5, 'Rayuela', '2023-10-17', 'Código del Libro 5', 5);
+
+INSERT INTO books (id, name, edition_date, code_book, author_id_author)
+VALUES (6, 'Ficciones', '2023-10-17', 'Código del Libro 6', 3);
+
+INSERT INTO books (id, name, edition_date, code_book, author_id_author)
+VALUES (7, 'Cuentos de la selva', '2023-10-17', 'Código del Libro 7', 7);
+
+INSERT INTO books (id, name, edition_date, code_book, author_id_author)
+VALUES (8, 'Las fieras cómplices', '2023-10-17', 'Código del Libro 8', 7);
+
+INSERT INTO books (id, name, edition_date, code_book, author_id_author)
+VALUES (9, 'Título del Libro 9', '2023-10-17', 'Código del Libro 9', 9);
+
+INSERT INTO books (id, name, edition_date, code_book, author_id_author)
+VALUES (10, 'Título del Libro 10', '2023-10-17', 'Código del Libro 10', 10);
+
+
+
 
 
 

@@ -1,20 +1,25 @@
 package com.example.libros.application.services;
 
+import com.example.libros.api.dtos.AuthorDto;
 import com.example.libros.api.dtos.BookDto;
 import com.example.libros.application.services.impl.BookService;
 import com.example.libros.domain.exceptions.BookNotFoundException;
+import com.example.libros.domain.models.Author;
 import com.example.libros.domain.models.Book;
+import com.example.libros.infrastructure.repositories.sql.AuthorSQLRepository;
 import com.example.libros.infrastructure.repositories.sql.BookSQLRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -23,25 +28,33 @@ class BookServiceTest {
 
     @Mock
     private BookSQLRepository repository;
+    @Mock
+    private AuthorSQLRepository authorRepository;
     @InjectMocks
     private BookService service;
 
     private Book book;
     private BookDto bookDto;
 
+    private AuthorDto authorDto;
+
+    private Author author;
+
     @BeforeEach
     void setUp(){
         MockitoAnnotations.initMocks(this);
         book = new Book();
-        book.setName("Rodrigo");
         book.setEditionDate(LocalDate.now());
         bookDto = new BookDto();
-
+        authorDto = new AuthorDto();
+        author = new Author();
+        author.setId(1L);
+        service = new BookService(repository,authorRepository);
     }
 
     @Test
     void getBooks() {
-        when(repository.findAll()).thenReturn(Arrays.asList(book));
+        when(repository.findAll()).thenReturn(Collections.singletonList(book));
         assertNotNull(service.getBooks());
     }
 
@@ -55,22 +68,39 @@ class BookServiceTest {
 
     @Test
     void createBook() {
-        when(repository.save(any(Book.class))).thenReturn(new Book());
-        assertNotNull(service.createBook(bookDto));
+        bookDto.setAuthorDto(authorDto);
+        when(authorRepository.findById(1L)).thenReturn(author);
+        when(repository.save(any(Book.class))).thenReturn(book);
+        authorDto.setId(1L);
+        bookDto.setAuthorDto(authorDto);
+        BookDto result = service.createBook(bookDto);
+
+        assertNotNull(result);
     }
 
     @Test
-    void updateBook() {
-        bookDto.setId(1L);
-        when(repository.existsById(1L)).thenReturn(true);
+    void testCreateBookWithInvalidAuthor(){
+        when(authorRepository.findById(1L)).thenReturn(null);
+        authorDto.setId(1L);
+        bookDto.setAuthorDto(authorDto);
+        assertThrows(BookNotFoundException.class,()->service.createBook(bookDto));
 
-
-        when(repository.save(any(Book.class))).thenReturn(book);
-        BookDto result = service.updateBook(bookDto);
-
-        assertNotNull(result);
 
     }
+    //Arreglar
+    @Test
+    void updateBook() {
+        Book existingBook = new Book();
+        Mockito.when(repository.findById(1L)).thenReturn(existingBook);
+        when(authorRepository.getReferenceById(1L)).thenReturn(author);
+        Mockito.when(repository.save(existingBook)).thenReturn(existingBook);
+        bookDto.setId(1L);
+        bookDto.setCodeBook("1234");
+        BookDto result = service.updateBook(bookDto);
+        assertEquals("1234",result.getCodeBook());
+
+    }
+
 
 
     @Test

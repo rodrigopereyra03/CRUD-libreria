@@ -43,39 +43,27 @@ public class AuthorService {
         return AuthorMapper.authorToDto(repository.save(AuthorMapper.dtoToAuthor(authorDto)));
     }
 
-    public AuthorDto updateAuthor(AuthorDto authorDto, Long id){
+    public AuthorDto updateAuthor(Long id,AuthorDto authorDto){
         Optional<Author> created = Optional.ofNullable(repository.findById(id));
         if (created.isPresent()){
             Author entity =created.get();
-            Author bookUpdate = AuthorMapper.dtoToAuthor(authorDto);
-            bookUpdate.setBooks(entity.getBooks());
+            Author authorToUpdate = AuthorMapper.dtoToAuthor(authorDto);
+            authorToUpdate.setBooks(entity.getBooks());
             if (authorDto.getIdBooks()!=null){
                 List<Book> bookList = iBookRepository.findAllById(authorDto.getIdBooks());
                 List<Book> bookListFilter = bookList.stream().filter(e->!entity.getBooks().contains(e)).toList();
-                bookUpdate.getBooks().addAll(bookListFilter);
-                bookUpdate.setBooks(bookList);
+                authorToUpdate.getBooks().addAll(bookListFilter);
+                authorToUpdate.setBooks(bookList);
             }
-            bookUpdate.setId(entity.getId());
+            authorToUpdate.setId(entity.getId());
 
-            Author saved = repository.save(bookUpdate);
+            Author saved = repository.save(authorToUpdate);
 
             return AuthorMapper.authorToDto(saved);
         }else {
             throw new AuthorNotFoundException("Author not found exceptions with id: "+ id);
         }
     }
-
-
-    //Actualizo un Autor
-    /*public AuthorDto updateAuthor(AuthorDto authorDto){
-        Boolean exists = repository.existsById(authorDto.getId());
-        if(!exists){
-            throw new AuthorNotFoundException("Author not found with id: " + authorDto.getId());
-        }
-        Author updated = repository.save(AuthorMapper.dtoToAuthor(authorDto));
-
-        return AuthorMapper.authorToDto(updated);
-    }*/
 
     //Elimino un Autor por id
     public String deleteAuthor(Long id){

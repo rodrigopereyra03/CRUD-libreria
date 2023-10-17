@@ -3,7 +3,6 @@ package com.example.libros.api.controllers;
 
 import com.example.libros.api.dtos.BookDto;
 import com.example.libros.application.services.IBookService;
-import com.example.libros.application.services.impl.BookService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +41,7 @@ public class BookController {
 
     //PUT
     @PutMapping(value = "/books")
-    public ResponseEntity<BookDto> updateBook( @RequestBody BookDto book){
+    public ResponseEntity<BookDto> updateBook(@RequestBody BookDto book){
         return ResponseEntity.status(HttpStatus.OK).body(iBookService.updateBook(book));
     }
 
@@ -69,6 +68,8 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
+
+    //Busco libro por codigo
     @GetMapping(value = "/books/getByCode")
     public ResponseEntity<List<BookDto>>getByCode(@RequestParam String code){
         List<BookDto> books = iBookService.getByCode(code);

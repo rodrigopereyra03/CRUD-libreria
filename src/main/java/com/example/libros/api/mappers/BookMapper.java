@@ -15,11 +15,8 @@ public class BookMapper {
     public Book dtoToBook(BookDto dto){
         Book book = new Book();
         book.setName(dto.getName());
-      //  book.setAuthor(dto.getAuthor());
         book.setEditionDate(dto.getEditionDate());
         book.setCodeBook(dto.getCodeBook());
-        book.setId(dto.getId());
-
         return book;
     }
 
@@ -27,10 +24,8 @@ public class BookMapper {
     public BookDto bookToDtoMap(Book book){
         BookDto dto = new BookDto();
         dto.setName(book.getName());
-      //  dto.setAuthor(book.getAuthor());
         dto.setEditionDate(book.getEditionDate());
         dto.setCodeBook(book.getCodeBook());
-
         if (book.getAuthor()!=null){
             AuthorDto authorDto = AuthorMapper.authorToDto(book.getAuthor());
             dto.setAuthorDto(authorDto);
