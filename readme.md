@@ -2,10 +2,12 @@
 
 API Rest para operaciones CRUD sobre libros.
 Tecnologias:
-Lenguaje Java
-Framework : Spring Boot
-Base de datos : MySQL y H2. Se desarrollo usando MySQL pero tambien se configuro H2 ya que es una base de datos en memoria
-y facilita las pruebas, con solo ejecutar el proyecto ya se puede consumir los endpoints. En el caso de querer utilizar MySQL hay que modificar el application.properties con los datos de conexion.
+- **Lenguaje Java**
+- **Framework : Spring Boot**
+- **Base de datos : MySQL y H2.** 
+- Se desarrollo usando MySQL pero tambien se configuro H2 ya que es una base de datos en memoria
+y facilita las pruebas, con solo ejecutar el proyecto ya se puede consumir los endpoints. 
+- En el caso de querer utilizar MySQL hay que modificar el application.properties con los datos de conexion.
 
 
 
