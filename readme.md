@@ -1,7 +1,7 @@
 # Documentación Book REST API
 
 API Rest para operaciones CRUD sobre libros.
-Tecnologias:
+## Tecnologias:
 - **Lenguaje Java**
 - **Framework : Spring Boot**
 - **Base de datos : MySQL y H2.** 
